@@ -1,0 +1,21 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="openpyxl" />
+          <option value="whisper" />
+          <option value="torch" />
+          <option value="speech_recognition" />
+          <option value="main.file" />
+          <option value="main.Szczecin" />
+          <option value="main.city" />
+          <option value="myapp.app.routes.manager_class" />
+          <option value="app.*" />
+          <option value="myapp.app.app_context" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <a href="{{ url_for('dashboard') }}" class="back-button">Wróć</a>
+    <title>Feedback</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 20px;
+        }
+        .feedback-container {
+            margin: auto;
+            width: 50%;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        label, textarea, button {
+            width: 100%;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Usuwa podkreślenie dla linków */
+        }
+         table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Feedback</h1>
+    <div class="feedback-container">
+        <form method="post">
+            <div class="form-group">
+                <label for="feedback">Twoja opinia:</label>
+                <textarea id="feedback" name="feedback" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Wyślij</button>
+            </div>
+        </form>
+        <table>
+            <thead>
+                <tr>
+                    <th>Opinia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedbacks %}
+                <tr>
+                    <td>{{ feedback.content }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

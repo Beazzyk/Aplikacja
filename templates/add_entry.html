@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj Wpis Czasowy</title>
+    <style>  .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+</style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+     <a href="{{ url_for('dashboard') }}" class="back-button">Wróć</a>
+
+    <main>
+        <h1>Dodaj Wpis Czasowy</h1>
+
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        <form method="post">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                <label for="start_time">Czas rozpoczęcia (YYYY-MM-DD HH:MM):</label>
+                {{ form.start_time(id="start_time", class_="form-control") }}
+                {% if form.start_time.errors %}
+                    {% for error in form.start_time.errors %}
+                        <span class="form-error">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <label for="end_time">Czas zakończenia (YYYY-MM-DD HH:MM):</label>
+                {{ form.end_time(id="end_time", class_="form-control") }}
+                {% if form.end_time.errors %}
+                    {% for error in form.end_time.errors %}
+                        <span class="form-error">{{ error }}</span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <button type="submit" class="btn-submit">{{ form.submit.label }}</button>
+        </form>
+    </main>
+
+</body>
+</html>

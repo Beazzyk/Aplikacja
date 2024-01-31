@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Zarządzaj Zadaniami</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 20px;
+        }
+        .task-container {
+            margin: auto;
+            width: 80%;
+            padding: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+        }
+        .button {
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .task-form form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            width: 50%;
+        }
+        .form-group label {
+            flex: 1;  /* Równa szerokość labeli */
+            margin-right: 10px;
+            text-align: right;
+        }
+        .form-group input,
+        .form-group textarea {
+            flex: 3;  /* Szerokie pola dla input i textarea */
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Usuwa podkreślenie dla linków */
+        }
+    </style>
+</head>
+<body>
+    <h1>Zarządzanie Zadaniami</h1>
+      <a href="{{ url_for('dashboard') }}" class="back-button">Wróć</a>
+    <div class="task-container">
+        <div class="task-form">
+            <form method="POST">
+                {{ form.hidden_tag() }}
+                <div class="form-group">
+                    {{ form.name.label }} {{ form.name }}
+                </div>
+                <div class="form-group">
+                    {{ form.description.label }} {{ form.description }}
+                </div>
+                <div class="form-group">
+                    {{ form.deadline.label }} {{ form.deadline }}
+                </div>
+                <div>
+                    {{ form.submit }}
+                </div>
+            </form>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nazwa Zadania</th>
+                    <th>Opis</th>
+                    <th>Termin</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.name }}</td>
+                    <td>{{ task.description }}</td>
+                    <td>{{ task.deadline.strftime('%Y-%m-%d') }}</td>
+                    <td class="action-buttons">
+                        <form action="{{ url_for('edit_task', task_id=task.id) }}" method="post" style="display: inline;">
+                            <input type="hidden" name="edit" value="{{ task.id }}">
+                            <button type="submit" class="button">Edytuj</button>
+                        </form>
+                        <form action="{{ url_for('delete_task', task_id=task.id) }}" method="post" style="display: inline;">
+                            <input type="hidden" name="delete" value="{{ task.id }}">
+                            <button type="submit" class="button">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

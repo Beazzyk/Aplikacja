@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <a href="{{ url_for('dashboard') }}" class="back-button">Wróć</a>
+    <title>Ustawienia Użytkownika</title>
+    <style>
+        body {
+            text-align: center;
+            padding: 20px;
+        }
+        .settings-container {
+            margin: auto;
+            width: 50%;
+            padding: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .form-group {
+            margin: 10px 0;
+        }
+        label, input, button {
+            width: 100%;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; /* Usuwa podkreślenie dla linków */
+        }
+    </style>
+</head>
+<body>
+{% for message in get_flashed_messages() %}
+        <div>{{ message }}</div>
+    {% endfor %}
+    <h1>Ustawienia Użytkownika</h1>
+    <div class="settings-container">
+        <form method="post" action="{{ url_for('user_settings') }}">
+            <div class="form-group">
+                <label for="username">Nazwa Użytkownika:</label>
+                <input type="text" id="username" name="username" value="{{ current_user.username }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Nowe Hasło:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Zapisz Zmiany</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

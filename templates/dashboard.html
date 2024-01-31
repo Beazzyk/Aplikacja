@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <style>
+        .dashboard-actions a {
+            margin: 5px;
+            padding: 10px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+        }
+        .btn-primary { background-color: #007bff; }
+        .btn-secondary { background-color: #6c757d; }
+        .btn-info { background-color: #17a2b8; }
+        .btn-warning { background-color: #ffc107; }
+        .btn-dark { background-color: #343a40; }
+        .btn-success { background-color: #28a745; }
+        .btn-danger { background-color: #dc3545; }
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <div class="dashboard-actions">
+        <a href="{{ url_for('add_entry') }}" class="btn btn-primary">Dodaj wpis czasu pracy</a>
+        <a href="{{ url_for('view_reports') }}" class="btn btn-secondary">Raporty i analizy</a>
+        <a href="{{ url_for('manage_tasks') }}" class="btn btn-info">Zarządzaj zadaniami</a>
+        <a href="{{ url_for('view_calendar') }}" class="btn btn-warning">Kalendarz nieobecności</a>
+        <a href="{{ url_for('user_settings') }}" class="btn btn-dark">Ustawienia użytkownika</a>
+        <a href="{{ url_for('feedback') }}" class="btn btn-success">Feedback</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-danger">Wyloguj</a>
+    </div>
+
+
+    <h2>Twoje zapisy czasu pracy:</h2>
+    <ul>
+        {% for entry in entries %}
+            <li>{{ entry.start_time.strftime('%Y-%m-%d %H:%M') }} - {{ entry.end_time.strftime('%Y-%m-%d %H:%M') }}</li>
+        {% else %}
+            <p>Brak zapisów czasu pracy.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
