@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import Flask, render_template, redirect, url_for, flash, request
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -133,7 +133,7 @@ def register():
 @login_required
 def dashboard():
     entries = TimeEntry.query.all()
-    return render_template('dashboard.html', entries=entries)
+    return render_template('dashboard.html', entries = entries)
 
 @app.route('/logout')
 @login_required

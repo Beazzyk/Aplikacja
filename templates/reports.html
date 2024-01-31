@@ -55,15 +55,40 @@
                 </tr>
             </thead>
             <tbody>
-                {% for report in reports %}
-                <tr>
-                    <td>{{ report.start_time.strftime('%Y-%m-%d') }}</td>
-                    <td>{{ report.start_time.strftime('%H-%M') }}</td>
-                    <td>{{ report.end_time.strftime('%H-%M') }}</td>
-                    <td>{{ report.end_time - report.start_time }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
+    {% for report in reports %}
+    <tr>
+        <td>
+            {% if report.start_time %}
+                {{ report.start_time.strftime('%Y-%m-%d') }}
+            {% else %}
+                Brak danych
+            {% endif %}
+        </td>
+        <td>
+            {% if report.start_time %}
+                {{ report.start_time.strftime('%H:%M') }}
+            {% else %}
+                Brak danych
+            {% endif %}
+        </td>
+        <td>
+            {% if report.end_time %}
+                {{ report.end_time.strftime('%H:%M') }}
+            {% else %}
+                Brak danych
+            {% endif %}
+        </td>
+        <td>
+            {% if report.start_time and report.end_time %}
+                {{ report.end_time - report.start_time }}
+            {% else %}
+                Brak danych
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+
         </table>
     </div>
 </body>

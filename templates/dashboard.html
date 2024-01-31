@@ -34,11 +34,17 @@
 
     <h2>Twoje zapisy czasu pracy:</h2>
     <ul>
-        {% for entry in entries %}
-            <li>{{ entry.start_time.strftime('%Y-%m-%d %H:%M') }} - {{ entry.end_time.strftime('%Y-%m-%d %H:%M') }}</li>
-        {% else %}
-            <p>Brak zapisów czasu pracy.</p>
-        {% endfor %}
-    </ul>
+    {% for entry in entries %}
+        <li>
+            {% if entry.start_time and entry.end_time %}
+                {{ entry.start_time.strftime('%Y-%m-%d %H:%M') }} - {{ entry.end_time.strftime('%Y-%m-%d %H:%M') }}
+            {% else %}
+                Brak pełnych danych o czasie pracy
+            {% endif %}
+        </li>
+    {% else %}
+        <p>Brak zapisów czasu pracy.</p>
+    {% endfor %}
+</ul>
 </body>
 </html>
